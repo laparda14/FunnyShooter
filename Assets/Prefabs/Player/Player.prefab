@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 8826694068921100592}
   - component: {fileID: 4847659040641811856}
   - component: {fileID: 7224115873115289265}
-  m_Layer: 9
+  - component: {fileID: 2232326209346106517}
+  - component: {fileID: 4963513066349068481}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -80,7 +82,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -113,11 +115,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983010633608720225}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 1
-  m_Mass: 0.13068584
+  m_Mass: 0.16560002
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -144,7 +146,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -184,7 +186,49 @@ MonoBehaviour:
     i14: 0
     i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &2232326209346106517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983010633608720225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &4963513066349068481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983010633608720225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 983010633608720238}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!1001 &9126080143168441121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,6 +236,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 983010633608720236}
     m_Modifications:
+    - target: {fileID: 7885918754769400206, guid: d709525c8ba32d04b9bac9a6ea930ea0,
+        type: 3}
+      propertyPath: m_Name
+      value: pref_Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 7885918754769400205, guid: d709525c8ba32d04b9bac9a6ea930ea0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -250,11 +299,6 @@ PrefabInstance:
     - target: {fileID: 1215059234, guid: d709525c8ba32d04b9bac9a6ea930ea0, type: 3}
       propertyPath: fakeGun
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7885918754769400206, guid: d709525c8ba32d04b9bac9a6ea930ea0,
-        type: 3}
-      propertyPath: m_Name
-      value: pref_Weapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d709525c8ba32d04b9bac9a6ea930ea0, type: 3}
