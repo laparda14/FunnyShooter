@@ -51,7 +51,7 @@ namespace FunnyShooter.Core {
                                 linkedList.Remove(next);
                                 dictionary.Remove(key);
                             } else {
-                                range = new CustomLinkedListRange<TValue>(next, range.End);
+                                dictionary[key] = new CustomLinkedListRange<TValue>(next, range.End);
                             }
                         }
 
