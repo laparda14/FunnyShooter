@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using FunnyShooter.Core;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -23,7 +22,40 @@ namespace FunnyShooter.Runtime {
                 GetComponent<PlayerPhysics2D>().enabled = false;
                 GetComponent<PlayerRigdbody2D>().enabled = false;
                 GetComponent<PlayerRotation>().enabled = false;
+                GetComponent<PlayerSpriteRenderer>().enabled = false;
             }
+            SyncLocalPlayer();
+        }
+
+        private void OnEnable() {
+            Utility.Event.Subscribe(GameEventId.OnTryGetClientAuthority, OnGameEventHandler);
+        }
+
+        private void OnDisable() {
+            Utility.Event.Unsubscribe(GameEventId.OnTryGetClientAuthority, OnGameEventHandler);
+        }
+
+        public override void OnStartLocalPlayer() {
+            base.OnStartLocalPlayer();
+            Utility.Event.Fire(GameEventId.OnStartLocalPlayer, gameObject);
+        }
+
+        private void SyncLocalPlayer() {
+            BroadcastMessage("OnSyncLocalPlayer", networkIdentity.isLocalPlayer);
+        }
+
+        private void OnGameEventHandler(object sender, GameEventArgs e) {
+            switch ((GameEventId)e.Id) {
+                case GameEventId.OnTryGetClientAuthority:
+                    GenericEventArgs<GameObject> args = e as GenericEventArgs<GameObject>;
+                    CmdGiveClientAuthority(args.Item);
+                    break;
+            }
+        }
+
+        [Command]
+        private void CmdGiveClientAuthority(GameObject obj) {
+            
         }
     }
 }

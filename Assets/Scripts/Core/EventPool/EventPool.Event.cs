@@ -1,7 +1,7 @@
 ﻿namespace FunnyShooter.Core {
     public partial class EventPool<T> where T : BaseEventArgs {
         /// <summary>
-        /// 事件节点。
+        /// 事件节点
         /// </summary>
         private sealed class Event : IReference {
             private object sender;

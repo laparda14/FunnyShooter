@@ -3,7 +3,7 @@ using SystemRandom = System.Random;
 
 public static partial class Utility {
     /// <summary>
-    /// 随机生成工具类。
+    /// 随机生成工具类
     /// </summary>
     public static class Random {
         private static readonly SystemRandom random;

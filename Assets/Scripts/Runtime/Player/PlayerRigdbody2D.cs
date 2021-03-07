@@ -15,7 +15,7 @@ namespace FunnyShooter.Runtime {
         }
 
         private void Update() {
-            if (!Mathf.Approximately(rigidbody2D.velocity.x, 0f)) {
+            if (!Utility.Math.Approximately(rigidbody2D.velocity.x, 0f)) {
                 Utility.Event.Fire(GameEventId.OnVelocityXChange, rigidbody2D.velocity.x);
                 isVelocityXChange = true;
             } else if (isVelocityXChange) {
@@ -23,7 +23,7 @@ namespace FunnyShooter.Runtime {
                 isVelocityXChange = false;
             }
 
-            if (!Mathf.Approximately(rigidbody2D.velocity.y, 0f)) {
+            if (!Utility.Math.Approximately(rigidbody2D.velocity.y, 0f)) {
                 Utility.Event.Fire(GameEventId.OnVelocityYChange, rigidbody2D.velocity.y);
                 isVelocityYChange = true;
             } else if (isVelocityYChange) {

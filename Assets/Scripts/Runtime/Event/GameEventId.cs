@@ -16,5 +16,9 @@
         OnVelocityYChange,
         OnGroundChange,
         OnJumpChange,
+        OnDirctionChange,
+        OnMousePositionChange,
+        OnWeaponDirctionChange,
+        OnTryGetClientAuthority,
     }
 }

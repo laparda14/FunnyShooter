@@ -6,7 +6,9 @@ namespace FunnyShooter.Runtime {
         private new Collider2D collider2D;
 
         public Bounds Bounds {
-            get { return collider2D.bounds; }
+            get {
+                return collider2D.bounds;
+            }
         }
 
         private void Awake() {

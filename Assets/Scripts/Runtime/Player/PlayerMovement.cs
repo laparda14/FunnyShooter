@@ -7,11 +7,9 @@ namespace FunnyShooter.Runtime {
         [SerializeField]
         private int moveSpeed = 3;
         private PlayerRigdbody2D playerRigdbody2D;
-        private PlayerPhysics2D playerPhysics2D;
 
         private void Awake() {
             playerRigdbody2D = GetComponent<PlayerRigdbody2D>();
-            playerPhysics2D = GetComponent<PlayerPhysics2D>();
         }
 
         private void OnEnable() {

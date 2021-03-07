@@ -5,7 +5,7 @@ using SystemAssembly = System.Reflection.Assembly;
 
 public static partial class Utility {
     /// <summary>
-    /// 程序集工具类。
+    /// 程序集工具类
     /// </summary>
     public static class Assembly {
         private static readonly SystemAssembly[] assemblies;

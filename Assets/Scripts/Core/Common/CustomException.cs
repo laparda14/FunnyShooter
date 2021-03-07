@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace FunnyShooter.Core {
     /// <summary>
-    /// 异常类。
+    /// 异常类
     /// </summary>
     public class CustomException : Exception {
         public CustomException() : base() {

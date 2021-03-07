@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 namespace FunnyShooter.Core {
     /// <summary>
     /// 链表范围结构体
-    /// 只存储起始节点和结束节点。
+    /// 只存储起始节点和结束节点
     /// </summary>
     /// <typeparam name="T">链表范围的元素类型</typeparam>
     [StructLayout(LayoutKind.Auto)]

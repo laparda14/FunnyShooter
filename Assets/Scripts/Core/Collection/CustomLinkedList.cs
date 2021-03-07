@@ -8,7 +8,7 @@ namespace FunnyShooter.Core {
     /// 游戏框架链表类
     /// 对比：多了缓存操作
     /// </summary>
-    /// <typeparam name="T">链表的元素类型。</typeparam>
+    /// <typeparam name="T">链表的元素类型</typeparam>
     public sealed class CustomLinkedList<T> : ICollection<T>, IEnumerable<T>, ICollection, IEnumerable {
         private LinkedList<T> linkedList;
         private Queue<LinkedListNode<T>> cachedNodes;

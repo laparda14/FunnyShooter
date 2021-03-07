@@ -4,7 +4,7 @@ using System.Text;
 
 public static partial class Utility {
     /// <summary>
-    /// 字符串相关工具类。
+    /// 字符串相关工具类
     /// </summary>
     public static class Text {
         [ThreadStatic]

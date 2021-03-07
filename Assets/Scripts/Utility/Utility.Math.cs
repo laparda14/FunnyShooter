@@ -1,35 +1,19 @@
-﻿using System;
-using SystemRandom = System.Random;
+﻿using UnityEngine;
+using SystemMath = System.Math;
 
 public static partial class Utility {
     /// <summary>
-    /// 随机生成工具类
+    /// 数学库工具类
     /// </summary>
-    public static class Random {
-        private static readonly SystemRandom random;
+    public static class Math {
 
-        static Random() {
-            random = new SystemRandom((int)DateTime.UtcNow.Ticks);
+        public static bool Approximately(float a, float b) {
+            return SystemMath.Abs(a - b) < float.Epsilon;
         }
 
-        public static int Next() {
-            return random.Next();
-        }
-
-        public static int Next(int maxValue) {
-            return random.Next(maxValue);
-        }
-
-        public static int Next(int minValue, int maxValue) {
-            return random.Next(minValue, maxValue);
-        }
-
-        public static void NextBytes(byte[] buffer) {
-            random.NextBytes(buffer);
-        }
-
-        public static double NextDouble() {
-            return random.NextDouble();
+        public static bool Approximately(Vector2 a, Vector2 b) {
+            return SystemMath.Abs(a.x - b.x) < float.Epsilon
+                && SystemMath.Abs(a.y - b.y) < float.Epsilon;
         }
     }
 }

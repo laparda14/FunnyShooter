@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace FunnyShooter.Core {
     /// <summary>
-    /// 事件池。
+    /// 事件池
     /// </summary>
-    /// <typeparam name="T">事件类型。</typeparam>
+    /// <typeparam name="T">事件类型</typeparam>
     public sealed partial class EventPool<T> where T : BaseEventArgs {
         private readonly CustomMultiDictionary<int, EventHandler<T>> eventHandlers;
         private readonly Queue<Event> events;

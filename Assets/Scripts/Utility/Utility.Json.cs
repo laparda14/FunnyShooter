@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static partial class Utility {
     /// <summary>
-    /// Json 工具类。
+    /// Json 工具类
     /// </summary>
     public static partial class Json {
 

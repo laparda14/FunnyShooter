@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FunnyShooter.Core {
     /// <summary>
-    /// 引用池。
+    /// 引用池
     /// </summary>
     public static partial class ReferencePool {
         private static Dictionary<Type, ReferenceCollection> referenceCollections = new Dictionary<Type, ReferenceCollection>();

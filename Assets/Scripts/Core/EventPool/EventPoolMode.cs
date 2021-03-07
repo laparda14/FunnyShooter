@@ -2,7 +2,7 @@
 
 namespace FunnyShooter.Core {
     /// <summary>
-    /// 事件池模式。
+    /// 事件池模式
     /// </summary>
     [Flags]
     public enum EventPoolMode : byte {

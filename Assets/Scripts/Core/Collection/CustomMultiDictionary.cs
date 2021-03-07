@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace FunnyShooter.Core {
     /// <summary>
-    /// 多值字典类。
+    /// 多值字典类
     /// </summary>
     /// <typeparam name="TKey">多值字典的主键类型</typeparam>
     /// <typeparam name="TValue">多值字典的值类型</typeparam>

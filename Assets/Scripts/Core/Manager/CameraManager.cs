@@ -1,32 +1,16 @@
 ﻿using UnityEngine;
 
 namespace FunnyShooter.Core {
-    public class InputManager : Singleton<InputManager> {
+    public class CameraManager : Singleton<CameraManager> {
 
-        public Vector2 MousePosition {
+        public Camera MainCamera {
             get {
-                return Input.mousePosition;
+                return Camera.main;
             }
         }
-        
-        public float GetAxis(string axisName) {
-            return Input.GetAxis(axisName);
-        }
 
-        public float GetAxisRaw(string axisName) {
-            return Input.GetAxisRaw(axisName);
-        }
-
-        public bool GetButton(string buttonName) {
-            return Input.GetButton(buttonName);
-        }
-
-        public bool GetButtonDown(string buttonName) {
-            return Input.GetButtonDown(buttonName);
-        }
-
-        public bool GetButtonUp(string buttonName) {
-            return Input.GetButtonUp(buttonName);
+        public Vector3 WorldToScreenPoint(Vector3 position) {
+            return Camera.main.WorldToScreenPoint(position);
         }
     }
 }

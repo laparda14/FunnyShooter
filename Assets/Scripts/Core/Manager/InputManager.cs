@@ -2,8 +2,13 @@
 
 namespace FunnyShooter.Core {
     public class InputManager : Singleton<InputManager> {
-        
 
+        public Vector2 MousePosition {
+            get {
+                return Input.mousePosition;
+            }
+        }
+        
         public float GetAxis(string axisName) {
             return Input.GetAxis(axisName);
         }

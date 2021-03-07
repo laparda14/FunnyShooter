@@ -1,6 +1,6 @@
 ﻿namespace FunnyShooter.Core {
     /// <summary>
-    /// 泛型事件参数。
+    /// 泛型事件参数
     /// </summary>
     public class GenericEventArgs : GameEventArgs {
         public override int Id {
