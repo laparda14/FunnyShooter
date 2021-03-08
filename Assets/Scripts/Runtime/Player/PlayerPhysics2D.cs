@@ -11,24 +11,18 @@ namespace FunnyShooter.Runtime {
             get { return !isOnGroundChange; }
         }
 
-        //public bool IsForwardWall {
-        //    get {
-        //        Vector2 point = playerCollider2D.Bounds.center;
-        //        Vector2 size = playerCollider2D.Bounds.size;
-        //        point.x += (playerCollider2D.Bounds.size.x + minCheckDistance) / 2;
-        //        point.y += minCheckDistance;
-        //        size.x = minCheckDistance;
-        //        return Physics2D.OverlapBox(point, size, 0, 1 << LayerMask.NameToLayer(LayerKey.Ground));
-        //    }
-        //}
-
-
         private void Awake() {
             playerCollider2D = GetComponent<PlayerCollider2D>();
         }
 
         private void Update() {
             CheckIsGround();
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision) {
+            if (collision.collider.CompareTag(TagKey.Bullet)) {
+                Utility.Event.Fire(GameEventId.OnPlayerHit, gameObject);
+            }
         }
 
         private void CheckIsGround() {

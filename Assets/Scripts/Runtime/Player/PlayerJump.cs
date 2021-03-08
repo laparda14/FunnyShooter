@@ -15,16 +15,16 @@ namespace FunnyShooter.Runtime {
         }
 
         private void OnEnable() {
-            Utility.Event.Subscribe(GameEventId.OnJumpChange, OnGameEventHandler);
+            Utility.Event.Subscribe(GameEventId.OnJumpInputChange, OnGameEventHandler);
         }
 
         private void OnDisable() {
-            Utility.Event.Unsubscribe(GameEventId.OnJumpChange, OnGameEventHandler);
+            Utility.Event.Unsubscribe(GameEventId.OnJumpInputChange, OnGameEventHandler);
         }
 
         private void OnGameEventHandler(object sender, GameEventArgs e) {
             switch ((GameEventId)e.Id) {
-                case GameEventId.OnJumpChange:
+                case GameEventId.OnJumpInputChange:
                     if (playerPhysics2D.IsGround) {
                         playerRigdbody2D.SetVelocityY(jumpSpeed);
                     }

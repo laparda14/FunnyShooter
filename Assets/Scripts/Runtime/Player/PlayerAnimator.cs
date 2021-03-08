@@ -10,14 +10,14 @@ namespace FunnyShooter.Runtime {
         }
 
         private void OnEnable() {
-            Utility.Event.Subscribe(GameEventId.OnMoveXChange, OnGameEventHandler);
+            Utility.Event.Subscribe(GameEventId.OnMoveXInputChange, OnGameEventHandler);
             Utility.Event.Subscribe(GameEventId.OnVelocityXChange, OnGameEventHandler);
             Utility.Event.Subscribe(GameEventId.OnVelocityYChange, OnGameEventHandler);
             Utility.Event.Subscribe(GameEventId.OnGroundChange, OnGameEventHandler);
         }
 
         private void OnDisable() {
-            Utility.Event.Unsubscribe(GameEventId.OnMoveXChange, OnGameEventHandler);
+            Utility.Event.Unsubscribe(GameEventId.OnMoveXInputChange, OnGameEventHandler);
             Utility.Event.Unsubscribe(GameEventId.OnVelocityXChange, OnGameEventHandler);
             Utility.Event.Unsubscribe(GameEventId.OnVelocityYChange, OnGameEventHandler);
             Utility.Event.Unsubscribe(GameEventId.OnGroundChange, OnGameEventHandler);

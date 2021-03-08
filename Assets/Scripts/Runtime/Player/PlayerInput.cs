@@ -10,16 +10,17 @@ namespace FunnyShooter.Runtime {
         private void Update() {
             InputMoveX();
             InputJump();
+            InputFire();
             InputMousePosition();
         }
 
         private void InputMoveX() {
             float moveX = InputManager.Instance.GetAxisRaw(InputKey.Horizontal);
             if (!Utility.Math.Approximately(moveX, 0f)) {
-                Utility.Event.Fire(GameEventId.OnMoveXChange, moveX);
+                Utility.Event.Fire(GameEventId.OnMoveXInputChange, moveX);
                 // isMoveXChange = true;
             } else {// if (isMoveXChange) {
-                Utility.Event.Fire(GameEventId.OnMoveXChange, 0f);
+                Utility.Event.Fire(GameEventId.OnMoveXInputChange, 0f);
                 // isMoveXChange = false;
             }
         }
@@ -27,7 +28,13 @@ namespace FunnyShooter.Runtime {
         private void InputJump() {
             bool isJump = InputManager.Instance.GetButtonDown(InputKey.Jump);
             if (isJump) {
-                Utility.Event.Fire(GameEventId.OnJumpChange, isJump);
+                Utility.Event.Fire(GameEventId.OnJumpInputChange);
+            }
+        }
+        private void InputFire() {
+            bool isFire = InputManager.Instance.GetButton(InputKey.Fire);
+            if (isFire) {
+                Utility.Event.Fire(GameEventId.OnFireInputChange);
             }
         }
 

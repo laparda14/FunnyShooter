@@ -16,6 +16,7 @@ namespace FunnyShooter.Runtime {
                 enabled = false;
                 GetComponent<PlayerAnimator>().enabled = false;
                 GetComponent<PlayerCollider2D>().enabled = false;
+                GetComponent<PlayerDamage>().enabled = false;
                 GetComponent<PlayerInput>().enabled = false;
                 GetComponent<PlayerJump>().enabled = false;
                 GetComponent<PlayerMovement>().enabled = false;
@@ -27,14 +28,6 @@ namespace FunnyShooter.Runtime {
             SyncLocalPlayer();
         }
 
-        private void OnEnable() {
-            Utility.Event.Subscribe(GameEventId.OnTryGetClientAuthority, OnGameEventHandler);
-        }
-
-        private void OnDisable() {
-            Utility.Event.Unsubscribe(GameEventId.OnTryGetClientAuthority, OnGameEventHandler);
-        }
-
         public override void OnStartLocalPlayer() {
             base.OnStartLocalPlayer();
             Utility.Event.Fire(GameEventId.OnStartLocalPlayer, gameObject);
@@ -42,20 +35,6 @@ namespace FunnyShooter.Runtime {
 
         private void SyncLocalPlayer() {
             BroadcastMessage("OnSyncLocalPlayer", networkIdentity.isLocalPlayer);
-        }
-
-        private void OnGameEventHandler(object sender, GameEventArgs e) {
-            switch ((GameEventId)e.Id) {
-                case GameEventId.OnTryGetClientAuthority:
-                    GenericEventArgs<GameObject> args = e as GenericEventArgs<GameObject>;
-                    CmdGiveClientAuthority(args.Item);
-                    break;
-            }
-        }
-
-        [Command]
-        private void CmdGiveClientAuthority(GameObject obj) {
-            
         }
     }
 }

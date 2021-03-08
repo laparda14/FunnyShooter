@@ -13,16 +13,16 @@ namespace FunnyShooter.Runtime {
         }
 
         private void OnEnable() {
-            Utility.Event.Subscribe(GameEventId.OnMoveXChange, OnGameEventHandler);
+            Utility.Event.Subscribe(GameEventId.OnMoveXInputChange, OnGameEventHandler);
         }
 
         private void OnDisable() {
-            Utility.Event.Unsubscribe(GameEventId.OnMoveXChange, OnGameEventHandler);
+            Utility.Event.Unsubscribe(GameEventId.OnMoveXInputChange, OnGameEventHandler);
         }
 
         private void OnGameEventHandler(object sender, GameEventArgs e) {
             switch ((GameEventId)e.Id) {
-                case GameEventId.OnMoveXChange:
+                case GameEventId.OnMoveXInputChange:
                     GenericEventArgs<float> args = e as GenericEventArgs<float>;
                     playerRigdbody2D.SetVelocityX(args.Item * moveSpeed);
                     break;

@@ -3,13 +3,9 @@ using FunnyShooter.Core;
 using UnityEngine.Networking;
 
 namespace FunnyShooter.Runtime {
-    [RequireComponent(typeof(SpriteRenderer))]
     public class WeaponSpriteRenderer : UnetBehaviour {
-        private SpriteRenderer spriteRenderer;
+        public SpriteRenderer spriteRenderer;
 
-        private void Awake() {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
 
         private void OnEnable() {
             Utility.Event.Subscribe(GameEventId.OnWeaponDirctionChange, OnGameEventHandler);

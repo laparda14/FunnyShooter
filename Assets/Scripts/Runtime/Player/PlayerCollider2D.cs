@@ -2,7 +2,7 @@
 
 namespace FunnyShooter.Runtime {
     [RequireComponent(typeof(Collider2D))]
-    public class PlayerCollider2D : UnetBehaviour {
+    public class PlayerCollider2D : MonoBehaviour {
         private new Collider2D collider2D;
 
         public Bounds Bounds {

@@ -1,5 +1,7 @@
-﻿namespace FunnyShooter.Runtime {
-    public class WeaponPivotIdentity : UnetBehaviour {
+﻿using UnityEngine;
+
+namespace FunnyShooter.Runtime {
+    public class WeaponPivotIdentity : MonoBehaviour {
 
         private void OnSyncLocalPlayer(bool isLocalPlayer) {
             if (!isLocalPlayer) {

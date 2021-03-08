@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
+﻿using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace FunnyShooter.Core {
     public class SceneManager : Singleton<SceneManager> {
