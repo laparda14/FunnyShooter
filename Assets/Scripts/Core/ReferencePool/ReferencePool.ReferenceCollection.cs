@@ -14,7 +14,7 @@ namespace FunnyShooter.Core {
 
             public T Acquire<T>() where T : IReference, new() {
                 if (typeof(T) != referenceType) {
-                    throw new CustomException(Utility.Text.Format("Type '{0}' is diffence from '{1}'.", typeof(T), references));
+                    throw new CustomException(Utility.Text.Format("Type '{0}' is diffence from '{1}'", typeof(T), references));
                 }
 
                 if (references.Count > 0) {
@@ -40,7 +40,7 @@ namespace FunnyShooter.Core {
                 reference.Clear();
                 lock (references) {
                     if (enableStrictCheck && references.Contains(reference)) {
-                        throw new CustomException(Utility.Text.Format("Reference '{0}' is exist in references.", reference));
+                        throw new CustomException(Utility.Text.Format("Reference '{0}' is exist in references", reference));
                     }
 
                     references.Enqueue(reference);
@@ -49,7 +49,7 @@ namespace FunnyShooter.Core {
 
             public void Add<T>(int count) where T : IReference, new() {
                 if (typeof(T) != referenceType) {
-                    throw new CustomException(Utility.Text.Format("Type '{0}' is diffence from '{1}'.", typeof(T), references));
+                    throw new CustomException(Utility.Text.Format("Type '{0}' is diffence from '{1}'", typeof(T), references));
                 }
 
                 lock (references) {

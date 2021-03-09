@@ -7,44 +7,38 @@ namespace FunnyShooter.Runtime {
     /// 对象池管理者
     /// </summary>
     public class GameObjectPoolManager : MonoSingleton<GameObjectPoolManager> {
-        [Header("需要池子管理的实体")]
-        public GameObject[] prefabs;
+        private Dictionary<string, GameObjectPool> gameObjectPoolDict;
 
-        private readonly Dictionary<string, GameObjectPool> gameObjectPoolDict = new Dictionary<string, GameObjectPool>();
+        protected override void Awake() {
+            base.Awake();
+            gameObjectPoolDict = new Dictionary<string, GameObjectPool>();
+        }
 
-        private void Start() {
-            foreach (GameObject pref in prefabs) {
-                string key = pref.name;
+        public T SpawnObj<T>(string prefabName) where T : Component {
+            return SpawnObj(prefabName).GetComponent<T>();
+        }
 
-                if (!gameObjectPoolDict.ContainsKey(key)) {
-                    GameObjectPool GameObjectPool = new GameObjectPool(pref);
-                    gameObjectPoolDict.Add(pref.name, GameObjectPool);
-                } else {
-                    Utility.Log.Debug("已经存在同名的对象池：{0}", key);
+        public GameObject SpawnObj(string prefabName) {
+            if (!gameObjectPoolDict.TryGetValue(prefabName, out GameObjectPool gameObjectPool)) {
+                GameObject prefab = ResourcesManager.Instance.Load<GameObject>(prefabName, ResourcesType.Prefab);
+                if (!prefab) {
+                    Utility.Log.Error("GameObjectPoolMgr.RecycleObj：不存在这个对象池，无法生产，请检查是否添加到了GameObjectPoolMgr中");
+                    return null;
                 }
+                gameObjectPool = new GameObjectPool(prefab);
+                gameObjectPoolDict.Add(prefab.name, gameObjectPool);
             }
-        }
-
-        public T SpawnObj<T>(string prefName) where T : Component {
-            return SpawnObj(prefName).GetComponent<T>();
-        }
-
-        public GameObject SpawnObj(string prefName) {
-            if (gameObjectPoolDict.TryGetValue(prefName, out GameObjectPool GameObjectPool)) {
-                return GameObjectPool.SpawnObj();
-            } else {
-                throw new CustomException("GameObjectPoolMgr.RecycleObj：不存在这个对象池，无法生产，请检查是否添加到了GameObjectPoolMgr中");
-            }
+            return gameObjectPool.SpawnObj();
         }
 
         public void RecycleObj(GameObject obj) {
             string objName = obj.name;
-            string prefName = objName.Substring(0, objName.IndexOf('-'));
+            string prefabName = objName.Substring(0, objName.IndexOf('-'));
 
-            if (gameObjectPoolDict.TryGetValue(prefName, out GameObjectPool GameObjectPool)) {
+            if (gameObjectPoolDict.TryGetValue(prefabName, out GameObjectPool GameObjectPool)) {
                 GameObjectPool.RecycleObj(obj);
             } else {
-                Utility.Log.Debug("不存在这个对象池，无法回收：{0}", prefName);
+                Utility.Log.Debug("不存在这个对象池，无法回收：'{0}'", prefabName);
             }
         }
     }

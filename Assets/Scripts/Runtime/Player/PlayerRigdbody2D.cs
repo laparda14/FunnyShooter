@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using FunnyShooter.Core;
+using UnityEngine;
+using UnityEngine.Networking;
 
 namespace FunnyShooter.Runtime {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -12,6 +14,14 @@ namespace FunnyShooter.Runtime {
 
         private void Awake() {
             rigidbody2D = GetComponent<Rigidbody2D>();
+        }
+
+        private void OnEnable() {
+            Utility.Event.Subscribe(GameEventId.OnPlayerDeath, OnGameEventHandler);
+        }
+
+        private void OnDisable() {
+            Utility.Event.Unsubscribe(GameEventId.OnPlayerDeath, OnGameEventHandler);
         }
 
         private void Update() {
@@ -32,6 +42,17 @@ namespace FunnyShooter.Runtime {
             }
         }
 
+        private void OnGameEventHandler(object sender, GameEventArgs e) {
+            switch ((GameEventId)e.Id) {
+                case GameEventId.OnPlayerDeath:
+                    if (sender.Equals(gameObject)) {
+                        enabled = false;
+                        CmdSetBodyType(RigidbodyType2D.Static);
+                    }
+                    break;
+            }
+        }
+
         public void SetVelocity(Vector2 velocity) {
             rigidbody2D.velocity = velocity;
         }
@@ -46,6 +67,16 @@ namespace FunnyShooter.Runtime {
             velocity = rigidbody2D.velocity;
             velocity.y = velocityY;
             rigidbody2D.velocity = velocity;
+        }
+
+        [Command]
+        private void CmdSetBodyType(RigidbodyType2D bodyType) {
+            RpcSetBodyType(bodyType);
+        }
+
+        [ClientRpc]
+        private void RpcSetBodyType(RigidbodyType2D bodyType) {
+            rigidbody2D.bodyType = RigidbodyType2D.Static;
         }
     }
 }

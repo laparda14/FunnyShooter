@@ -30,7 +30,7 @@ namespace FunnyShooter.Runtime {
 
         public override void OnStartLocalPlayer() {
             base.OnStartLocalPlayer();
-            Utility.Event.Fire(GameEventId.OnStartLocalPlayer, gameObject);
+            Utility.Event.Fire(gameObject, GameEventId.OnStartLocalPlayer);
         }
 
         private void SyncLocalPlayer() {

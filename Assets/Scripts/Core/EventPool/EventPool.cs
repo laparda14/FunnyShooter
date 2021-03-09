@@ -60,7 +60,7 @@ namespace FunnyShooter.Core {
 
         public bool Check(int id, EventHandler<T> handler) {
             if (handler == null) {
-                throw new CustomException(Utility.Text.Format("Event '{0}' handler is invalid.", id));
+                throw new CustomException(Utility.Text.Format("Event '{0}' handler is invalid", id));
             }
 
             return eventHandlers.Contains(id, handler);
@@ -69,15 +69,15 @@ namespace FunnyShooter.Core {
 
         public void Subscribe(int id, EventHandler<T> handler) {
             if (handler == null) {
-                throw new CustomException(Utility.Text.Format("Event '{0}' handler is invalid.", id));
+                throw new CustomException(Utility.Text.Format("Event '{0}' handler is invalid", id));
             }
 
             if (!eventHandlers.Contains(id, handler)) {
                 eventHandlers.Add(id, handler);
             } else if ((eventPoolMode & EventPoolMode.AllowMultiHandler) != EventPoolMode.AllowMultiHandler) {
-                throw new CustomException(Utility.Text.Format("Event '{0}' handler not allow mulit invalid.", id));
+                throw new CustomException(Utility.Text.Format("Event '{0}' handler not allow mulit invalid", id));
             } else if ((eventPoolMode & EventPoolMode.AllDuplicateHandler) != EventPoolMode.AllDuplicateHandler) {
-                throw new CustomException(Utility.Text.Format("Event '{0}' handler not allow duplicate invalid.", id));
+                throw new CustomException(Utility.Text.Format("Event '{0}' handler not allow duplicate invalid", id));
             } else {
                 eventHandlers.Add(id, handler);
             }
@@ -85,11 +85,11 @@ namespace FunnyShooter.Core {
 
         public void Unsubscribe(int id, EventHandler<T> handler) {
             if (handler == null) {
-                throw new CustomException(Utility.Text.Format("Event '{0}' handler is invalid.", id));
+                throw new CustomException(Utility.Text.Format("Event '{0}' handler is invalid", id));
             }
 
             if (!eventHandlers.Remove(id, handler)) {
-                throw new CustomException(Utility.Text.Format("Event '{0}' not exist specified handler.", id));
+                throw new CustomException(Utility.Text.Format("Event '{0}' not exist specified handler", id));
             }
         }
 
@@ -99,7 +99,7 @@ namespace FunnyShooter.Core {
 
         public void Fire(object sender, T e) {
             if (e == null) {
-                throw new CustomException("Event is invalid.");
+                throw new CustomException("Event is invalid");
             }
 
             lock (events) {
@@ -114,7 +114,7 @@ namespace FunnyShooter.Core {
 
         public void FireNow(object sender, T e) {
             if (e == null) {
-                throw new CustomException("Event is invalid.");
+                throw new CustomException("Event is invalid");
             }
 
             HandleEvent(sender, e);
@@ -133,7 +133,7 @@ namespace FunnyShooter.Core {
             ReferencePool.Release(e);
 
             if (noHandlerException) {
-                throw new CustomException("Event not allow on handler.");
+                throw new CustomException("Event not allow on handler");
             }
         }
     }

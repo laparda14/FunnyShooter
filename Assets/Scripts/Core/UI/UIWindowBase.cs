@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 
 namespace FunnyShooter.Core {
-    public class UIWindowBase : MonoBehaviour {
+    public abstract class UIWindowBase : MonoBehaviour {
         public UIData UIData { get; private set; }
+
+        private void Update() {
+            OnUpdateWindow();
+        }
 
         public void InitData(UIData data) {
             UIData = data;
@@ -13,19 +17,20 @@ namespace FunnyShooter.Core {
 
         }
 
-        public virtual void OnCreat() {
+        public virtual void OnCreatWindow() {
         }
 
-        public virtual void OnClose() {
+        public virtual void OnCloseWindow() {
+            ReferencePool.Release(UIData);
         }
 
-        public virtual void OnShow() {
+        public virtual void OnShowWindow() {
         }
 
-        public virtual void OnHide() {
+        public virtual void OnHideWindow() {
         }
 
-        public virtual void OnUpdate() {
+        public virtual void OnUpdateWindow() {
         }
     }
 }

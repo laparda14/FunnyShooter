@@ -13,23 +13,22 @@ namespace FunnyShooter.Runtime {
 
         private void OnEnable() {
             Utility.Event.Subscribe(GameEventId.OnStartLocalPlayer, OnGameEventHandler);
-            Utility.Event.Subscribe(GameEventId.OnDirctionChange, OnGameEventHandler);
+            Utility.Event.Subscribe(GameEventId.OnPlayerDirctionChange, OnGameEventHandler);
         }
 
         private void OnDisable() {
             Utility.Event.Unsubscribe(GameEventId.OnStartLocalPlayer, OnGameEventHandler);
-            Utility.Event.Unsubscribe(GameEventId.OnDirctionChange, OnGameEventHandler);
+            Utility.Event.Unsubscribe(GameEventId.OnPlayerDirctionChange, OnGameEventHandler);
         }
 
         private void OnGameEventHandler(object sender, GameEventArgs e) {
             switch ((GameEventId)e.Id) {
                 case GameEventId.OnStartLocalPlayer:
-                    GenericEventArgs<GameObject> args1 = e as GenericEventArgs<GameObject>;
-                    if (args1.Item == gameObject) {
+                    if (sender.Equals(gameObject)) {
                         spriteRenderer.color = Color.green;
                     }
                     break;
-                case GameEventId.OnDirctionChange:
+                case GameEventId.OnPlayerDirctionChange:
                     GenericEventArgs<bool> args2 = e as GenericEventArgs<bool>;
                     CmdSetFlipX(!args2.Item);
                     break;

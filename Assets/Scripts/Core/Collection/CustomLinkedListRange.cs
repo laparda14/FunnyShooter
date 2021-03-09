@@ -82,7 +82,7 @@ namespace FunnyShooter.Core {
 
             public Enumerator(CustomLinkedListRange<T> range) {
                 if (!range.IsValid) {
-                    throw new CustomException("Range is invalid.");
+                    throw new CustomException("Range is invalid");
                 }
 
                 CustomLinkedListRange = range;

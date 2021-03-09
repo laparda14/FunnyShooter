@@ -147,7 +147,7 @@ namespace FunnyShooter.Core {
         public void RemoveFirst() {
             LinkedListNode<T> first = linkedList.First;
             if (first == null) {
-                throw new CustomException("First is invalid.");
+                throw new CustomException("First is invalid");
             }
 
             linkedList.RemoveFirst();
@@ -157,7 +157,7 @@ namespace FunnyShooter.Core {
         public void RemoveLast() {
             LinkedListNode<T> last = linkedList.Last;
             if (last == null) {
-                throw new CustomException("Last is invalid.");
+                throw new CustomException("Last is invalid");
             }
 
             linkedList.RemoveLast();
@@ -203,7 +203,7 @@ namespace FunnyShooter.Core {
 
             public Enumerator(LinkedList<T> linkedList) {
                 if (linkedList == null) {
-                    throw new CustomException("Linked list is invalid.");
+                    throw new CustomException("Linked list is invalid");
                 }
 
                 enumerator = linkedList.GetEnumerator();

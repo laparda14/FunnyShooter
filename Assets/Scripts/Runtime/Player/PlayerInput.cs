@@ -7,11 +7,29 @@ namespace FunnyShooter.Runtime {
         private Vector2 mousePosition;
         private Vector2 lastMousePosition;
 
+        private void OnEnable() {
+            Utility.Event.Subscribe(GameEventId.OnPlayerDeath, OnGameEventHandler);
+        }
+
+        private void OnDisable() {
+            Utility.Event.Unsubscribe(GameEventId.OnPlayerDeath, OnGameEventHandler);
+        }
+
         private void Update() {
             InputMoveX();
             InputJump();
             InputFire();
             InputMousePosition();
+        }
+
+        private void OnGameEventHandler(object sender, GameEventArgs e) {
+            switch ((GameEventId)e.Id) {
+                case GameEventId.OnPlayerDeath:
+                    if (sender.Equals(gameObject)) {
+                        enabled = false;
+                    }
+                    break;
+            }
         }
 
         private void InputMoveX() {

@@ -32,6 +32,9 @@ namespace FunnyShooter.Runtime {
         public void RecycleObj(GameObject obj) {
             unUsedObjs.Enqueue(obj);
             obj.SetActive(false);
+            if (obj.transform.parent != GameObjectPoolManager.Instance.transform) {
+                obj.transform.SetParent(GameObjectPoolManager.Instance.transform);
+            }
         }
     }
 }

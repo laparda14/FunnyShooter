@@ -4,6 +4,6 @@
         public const string VelocityY = "VelocityY";
         public const string IsGround = "IsGround";
         public const string IsDeath = "IsDeath";
-        public const string Hit = "OnHit";
+        public const string OnHit = "OnHit";
     }
 }

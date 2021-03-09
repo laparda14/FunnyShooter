@@ -5,13 +5,15 @@ using FunnyShooter.Core;
 namespace FunnyShooter.Runtime {
     public class PlayerDamage : UnetBehaviour {
         [SerializeField]
-        private float maxHealth = 10;
-        [SyncVar]
+        private int maxHealth = 10;
+        [SerializeField][SyncVar(hook = "OnHealthChange")]
+        private int currentHealth;
         [SerializeField]
-        private float currentHealth;
+        private Transform healthBarTarget;
 
         private void Start() {
-            currentHealth = maxHealth;
+            CmdRestoreMaxHealth();
+            Utility.Event.Fire(gameObject, GameEventId.OnHealthBarCreate, healthBarTarget);
         }
 
         private void OnEnable() {
@@ -25,17 +27,32 @@ namespace FunnyShooter.Runtime {
         private void OnGameEventHandler(object sender, GameEventArgs e) {
             switch ((GameEventId)e.Id) {
                 case GameEventId.OnPlayerHit:
-                    GenericEventArgs<GameObject> args = e as GenericEventArgs<GameObject>;
-                    if (args.Item == gameObject) {
-                        CmdGetDamage();
+                    if (sender.Equals(gameObject)) {
+                        GetDamage();
                     }
                     break;
             }
         }
 
+        public void GetDamage() {
+            CmdChangeHealth(-1);
+        }
+
         [Command]
-        private void CmdGetDamage() {
-            currentHealth--;
+        public void CmdChangeHealth(int health) {
+            currentHealth = Utility.Math.Clamp(currentHealth + health, 0, maxHealth);
+        }
+
+        [Command]
+        public void CmdRestoreMaxHealth() {
+            currentHealth = maxHealth;
+        }
+
+        private void OnHealthChange(int currentHealth) {
+            Utility.Event.Fire(GameEventId.OnHealthChange, healthBarTarget, currentHealth / (float)maxHealth);
+            if (currentHealth <= 0) {
+                Utility.Event.Fire(gameObject, GameEventId.OnPlayerDeath);
+            }
         }
     }
 }

@@ -18,6 +18,7 @@
         OnJumpInputChange,
         OnFireInputChange,
         OnDirctionChange,
+        OnPlayerDirctionChange,
         OnMousePositionChange,
         OnWeaponDirctionChange,
         OnRecycleAllObjects,
@@ -25,5 +26,10 @@
         OnFireShake,
         OnExplosionShake,
         OnPlayerHit,
+        OnHealthBarCreate,
+        OnHealthChange,
+        OnPlayerDeath,
+        OnUnetShop,
+        OnServerDisconnect
     }
 }

@@ -14,7 +14,7 @@ public static partial class Utility {
         public static string Format(string format, object arg0) {
             CheckStringBuilder();
             if (string.IsNullOrEmpty(format)) {
-                throw new CustomException("Format is null or empty.");
+                throw new CustomException("Format is null or empty");
             }
             stringBuilder.Clear();
             stringBuilder.AppendFormat(format, arg0);
@@ -24,7 +24,7 @@ public static partial class Utility {
         public static string Format(string format, object arg0, object arg1) {
             CheckStringBuilder();
             if (string.IsNullOrEmpty(format)) {
-                throw new CustomException("Format is null or empty.");
+                throw new CustomException("Format is null or empty");
             }
 
             stringBuilder.Clear();
@@ -35,7 +35,7 @@ public static partial class Utility {
         public static string Format(string format, object arg0, object arg1, object arg2) {
             CheckStringBuilder();
             if (string.IsNullOrEmpty(format)) {
-                throw new CustomException("Format is null or empty.");
+                throw new CustomException("Format is null or empty");
             }
 
             stringBuilder.Clear();
@@ -46,7 +46,7 @@ public static partial class Utility {
         public static string Format(string format, params object[] args) {
             CheckStringBuilder();
             if (string.IsNullOrEmpty(format)) {
-                throw new CustomException("Format is null or empty.");
+                throw new CustomException("Format is null or empty");
             }
 
             stringBuilder.Clear();

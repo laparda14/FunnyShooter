@@ -6,15 +6,13 @@ namespace FunnyShooter.Runtime {
     /// 镜头跟随器
     /// </summary>
     public class CameraFollowTarget : MonoBehaviour {
-        public Transform target;
-        public Vector3 offest;
-        public float followSpeed = 5f;
+        [SerializeField]
+        private Transform target;
+        [SerializeField]
+        private float offest;
+        [SerializeField]
+        private float followSpeed = 5f;
         private Vector3 realOffset;
-
-        private void Start() {
-            offest.z = 0;
-            realOffset = offest;
-        }
 
         private void OnEnable() {
             Utility.Event.Subscribe(GameEventId.OnStartLocalPlayer, OnGameEventHandler);
@@ -36,13 +34,11 @@ namespace FunnyShooter.Runtime {
         private void OnGameEventHandler(object sender, GameEventArgs e) {
             switch ((GameEventId)e.Id) {
                 case GameEventId.OnStartLocalPlayer:
-                    GenericEventArgs<GameObject> args1 = e as GenericEventArgs<GameObject>;
-                    target = args1.Item.transform;
+                    target = ((GameObject)sender).transform;
                     break;
                 case GameEventId.OnDirctionChange:
-                    GenericEventArgs<bool> args2 = e as GenericEventArgs<bool>;
-                    realOffset = offest;
-                    realOffset.x *= args2.Item ? 1 : -1;
+                    GenericEventArgs<Vector2> args2 = e as GenericEventArgs<Vector2>;
+                    realOffset = args2.Item * offest;
                     break;
             }
         }

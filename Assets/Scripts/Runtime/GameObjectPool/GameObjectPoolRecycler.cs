@@ -38,7 +38,7 @@ namespace FunnyShooter.Runtime {
 
         private void OnGameEventHandler(object sender, GameEventArgs e) {
             switch ((GameEventId)e.Id) {
-                case GameEventId.OnStartLocalPlayer:
+                case GameEventId.OnRecycleAllObjects:
                     RecycleObj();
                     break;
             }

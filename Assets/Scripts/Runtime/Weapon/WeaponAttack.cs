@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 namespace FunnyShooter.Runtime {
     public class WeaponAttack : UnetBehaviour {
         [SerializeField]
-        private EffectDisplay flashEffectDisplay;
+        private EffectDisplayNonRecycler flashEffectDisplay;
         [SerializeField]
         private Transform muzzle;
         [SerializeField]

@@ -14,6 +14,8 @@ namespace FunnyShooter.Runtime {
             Utility.Event.Subscribe(GameEventId.OnVelocityXChange, OnGameEventHandler);
             Utility.Event.Subscribe(GameEventId.OnVelocityYChange, OnGameEventHandler);
             Utility.Event.Subscribe(GameEventId.OnGroundChange, OnGameEventHandler);
+            Utility.Event.Subscribe(GameEventId.OnPlayerHit, OnGameEventHandler);
+            Utility.Event.Subscribe(GameEventId.OnPlayerDeath, OnGameEventHandler);
         }
 
         private void OnDisable() {
@@ -21,11 +23,13 @@ namespace FunnyShooter.Runtime {
             Utility.Event.Unsubscribe(GameEventId.OnVelocityXChange, OnGameEventHandler);
             Utility.Event.Unsubscribe(GameEventId.OnVelocityYChange, OnGameEventHandler);
             Utility.Event.Unsubscribe(GameEventId.OnGroundChange, OnGameEventHandler);
+            Utility.Event.Unsubscribe(GameEventId.OnPlayerHit, OnGameEventHandler);
+            Utility.Event.Unsubscribe(GameEventId.OnPlayerDeath, OnGameEventHandler);
         }
 
         private void OnGameEventHandler(object sender, GameEventArgs e) {
             switch ((GameEventId)e.Id) {
-                case GameEventId.OnVelocityXChange:
+                case GameEventId.OnMoveXInputChange:
                     GenericEventArgs<float> args1 = e as GenericEventArgs<float>;
                     animator.SetFloat(AnimatorKey.VelocityX, Mathf.Abs(args1.Item));
                     break;
@@ -36,6 +40,16 @@ namespace FunnyShooter.Runtime {
                 case GameEventId.OnGroundChange:
                     GenericEventArgs<bool> args3 = e as GenericEventArgs<bool>;
                     animator.SetBool(AnimatorKey.IsGround, args3.Item);
+                    break;
+                case GameEventId.OnPlayerHit:
+                    if (sender.Equals(gameObject)) {
+                        animator.SetTrigger(AnimatorKey.OnHit);
+                    }
+                    break;
+                case GameEventId.OnPlayerDeath:
+                    if (sender.Equals(gameObject)) {
+                        animator.SetBool(AnimatorKey.IsDeath, true);
+                    }
                     break;
             }
         }

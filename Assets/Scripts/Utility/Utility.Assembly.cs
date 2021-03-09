@@ -32,7 +32,7 @@ public static partial class Utility {
 
         public static void GetTypes(List<Type> results) {
             if (results == null) {
-                throw new CustomException("Results is invalid.");
+                throw new CustomException("Results is invalid");
             }
 
             results.Clear();
@@ -43,7 +43,7 @@ public static partial class Utility {
 
         public static Type GetType(string typeName) {
             if (string.IsNullOrEmpty(typeName)) {
-                throw new CustomException("Type name is invalid.");
+                throw new CustomException("Type name is invalid");
             }
 
             if (cachedTypes.TryGetValue(typeName, out Type result)) {

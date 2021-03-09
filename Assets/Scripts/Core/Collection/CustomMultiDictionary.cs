@@ -54,8 +54,7 @@ namespace FunnyShooter.Core {
                                 dictionary[key] = new CustomLinkedListRange<TValue>(next, range.End);
                             }
                         }
-
-                        linkedList.Remove(value);
+                        linkedList.Remove(current);
                         return true;
                     }
                 }
@@ -116,7 +115,7 @@ namespace FunnyShooter.Core {
 
             public Enumerator(Dictionary<TKey, CustomLinkedListRange<TValue>> dictionary) {
                 if (dictionary == null) {
-                    throw new CustomException("Dictionary is invalid.");
+                    throw new CustomException("Dictionary is invalid");
                 }
 
                 enumerator = dictionary.GetEnumerator();

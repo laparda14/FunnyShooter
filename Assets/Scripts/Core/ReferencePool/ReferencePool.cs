@@ -29,7 +29,7 @@ namespace FunnyShooter.Core {
 
         public static void Release(IReference reference) {
             if (reference == null) {
-                throw new CustomException("Reference type is invalid.");
+                throw new CustomException("Reference type is invalid");
             }
 
             Type referenceType = reference.GetType();
@@ -80,21 +80,21 @@ namespace FunnyShooter.Core {
             }
 
             if (referenceType == null) {
-                throw new CustomException("Reference type is invalid.");
+                throw new CustomException("Reference type is invalid");
             }
 
             if (!referenceType.IsClass || referenceType.IsAbstract) {
-                throw new CustomException(Utility.Text.Format("Reference type '{0}' is not non-abstract class type.", referenceType));
+                throw new CustomException(Utility.Text.Format("Reference type '{0}' is not non-abstract class type", referenceType));
             }
 
             if (!typeof(IReference).IsAssignableFrom(referenceType)) {
-                throw new CustomException(Utility.Text.Format("Reference type '{0}' is invalid.", referenceType));
+                throw new CustomException(Utility.Text.Format("Reference type '{0}' is invalid", referenceType));
             }
         }
 
         private static ReferenceCollection GetReferenceCollection(Type referenceType) {
             if (referenceType == null) {
-                throw new CustomException("Reference type is invalid.");
+                throw new CustomException("Reference type is invalid");
             }
 
             ReferenceCollection referenceCollection = null;
