@@ -7,12 +7,14 @@ namespace FunnyShooter.Core {
         private Dictionary<string, UIWindowBase> allUIWindows;
         private Dictionary<string, UIWindowBase> showUIWindows;
         private Dictionary<int, Transform> allUINodes;
+        private Stack<UIWindowBase> fullScreenWindows;
 
         protected override void Awake() {
             base.Awake();
             allUIWindows = new Dictionary<string, UIWindowBase>();
             showUIWindows = new Dictionary<string, UIWindowBase>();
             allUINodes = new Dictionary<int, Transform>();
+            fullScreenWindows = new Stack<UIWindowBase>();
             CreatUINode();
         }
 
@@ -80,6 +82,13 @@ namespace FunnyShooter.Core {
             }
             windowBase.transform.SetAsLastSibling();
             showUIWindows.Add(windowName, windowBase);
+            if (data.WindowType == UIWindowType.FullScreen) {
+                if (fullScreenWindows.Count > 0) {
+                    UIWindowBase lastFullScreenWindow = fullScreenWindows.Peek();
+                    lastFullScreenWindow.gameObject.SetActive(false);
+                }
+                fullScreenWindows.Push(windowBase);
+            }
         }
 
         public void HideWindow(string windowName) {
@@ -87,6 +96,13 @@ namespace FunnyShooter.Core {
                 windowBase.gameObject.SetActive(false);
                 windowBase.OnHideWindow();
                 showUIWindows.Remove(windowName);
+                if (windowBase.UIData.WindowType == UIWindowType.FullScreen) {
+                    fullScreenWindows.Pop();
+                    if (fullScreenWindows.Count > 0) {
+                        UIWindowBase fullScreenWindow = fullScreenWindows.Peek();
+                        fullScreenWindow.gameObject.SetActive(true);
+                    }
+                }
             } else {
                 Utility.Log.Error("this window '{0}' is not exist in show windows", windowName);
             }
@@ -101,6 +117,13 @@ namespace FunnyShooter.Core {
                 showUIWindows.Remove(windowName);
                 allUIWindows.Remove(windowName);
                 windowBase.OnCloseWindow();
+                if (windowBase.UIData.WindowType == UIWindowType.FullScreen) {
+                    fullScreenWindows.Pop();
+                    if (fullScreenWindows.Count > 0) {
+                        UIWindowBase fullScreenWindow = fullScreenWindows.Peek();
+                        fullScreenWindow.gameObject.SetActive(true);
+                    }
+                }
                 Destroy(windowBase.gameObject);
             } else {
                 Utility.Log.Error("this window '{0}' is not exist in show windows", windowName);
@@ -111,11 +134,12 @@ namespace FunnyShooter.Core {
         /// 注意会关闭所有窗口包括隐藏的
         /// </summary>
         public void CloseAllWindow() {
-            foreach(UIWindowBase windowBase in allUIWindows.Values) {
+            foreach (UIWindowBase windowBase in allUIWindows.Values) {
                 windowBase.OnCloseWindow();
             }
             allUIWindows.Clear();
             showUIWindows.Clear();
+            fullScreenWindows.Clear();
         }
 
         public bool HasWindow(string windowName) {

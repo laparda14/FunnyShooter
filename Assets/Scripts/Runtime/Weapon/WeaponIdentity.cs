@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace FunnyShooter.Runtime {
+﻿namespace FunnyShooter.Runtime {
     public class WeaponIdentity : UnetBehaviour {
 
         private void OnSyncLocalPlayer(bool isLocalPlayer) {

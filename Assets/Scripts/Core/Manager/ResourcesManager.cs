@@ -29,6 +29,7 @@ namespace FunnyShooter.Core {
     }
 
     public enum ResourcesType {
+        Audio,
         Prefab,
         Window,
     }

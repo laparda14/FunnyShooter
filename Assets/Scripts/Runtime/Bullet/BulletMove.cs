@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 
 namespace FunnyShooter.Runtime {
     public class BulletMove : MonoBehaviour {

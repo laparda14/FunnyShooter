@@ -31,6 +31,7 @@ namespace FunnyShooter.Runtime {
         }
 
         public void OnStopBtnClick() {
+            SoundManager.Instance.PlayerSource("OnClickSound");
             UnetManager.Instance.CustomStop();
             SceneManager.Instance.LoadScene("Main");
             Utility.Event.FireNow(GameEventId.OnRecycleAllObjects);

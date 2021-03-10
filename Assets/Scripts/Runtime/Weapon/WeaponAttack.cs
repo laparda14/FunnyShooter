@@ -52,6 +52,7 @@ namespace FunnyShooter.Runtime {
 
         [ClientRpc]
         private void RpcFireDisplay() {
+            SoundManager.Instance.PlayerSource("Shoot", transform.position);
             flashEffectDisplay.ShowEffect();
             GameObject bullet = GameObjectPoolManager.Instance.SpawnObj("Bullet");
             bullet.transform.position = muzzle.position;
