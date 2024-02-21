@@ -11,7 +11,7 @@ namespace FunnyShooter.Runtime {
         [SerializeField]
         private WeaponPivotRotation weaponPivotRotation;
         [SerializeField]
-        private float shootRate = 1;
+        private float shootRate = 0.5;
         private float shootCoolTimer;
 
         private void OnEnable() {
